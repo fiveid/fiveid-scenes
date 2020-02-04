@@ -1,0 +1,21 @@
+{
+  "name": "@fiveid/scenes",
+  "version": "0.0.1",
+  "description": "Minimalist scene switching with vanilla JS ",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "demo:start": "parcel demo/index.html --open",
+    "demo:build": "parcel build demo/index.html --out-dir public",
+    "build": "tsc --project tsconfig.json"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.7.5"
+  },
+  "keywords": [],
+  "publishConfig": {
+    "access": "public"
+  }
+}

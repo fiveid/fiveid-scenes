@@ -1,0 +1,6 @@
+node_modules
+index.js
+index.d.ts
+.cache
+dist
+public

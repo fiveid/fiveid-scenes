@@ -1,0 +1,118 @@
+body {
+  font-family: "Roboto Slab", serif;
+  margin: 0;
+  padding: 0;
+  background: black;
+  font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span,
+button {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+button {
+  background: transparent;
+  text-transform: uppercase;
+  border: none;
+  border-bottom: 2px solid white;
+  box-shadow: none;
+  font-weight: bold;
+  padding: 15px 0;
+  font-family: "Roboto Slab", serif;
+  font-size: 1rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.scene {
+  width: 100%;
+  height: 100vh;
+  border: 10px solid black;
+  background-color: rgb(200, 200, 200);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transform: translate(0, 100vh) scale(0);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.55, -0.29, 0.46, 1.29);
+  padding: 15px;
+  text-align: center;
+}
+
+.scene.active--true,
+.scene.active {
+  transform: translate(0, 0) scale(1);
+  opacity: 1;
+}
+
+.yellow-bg {
+  background-color: #eac435;
+}
+.blue-bg {
+  background-color: #345995;
+}
+.green-bg {
+  background-color: #03cea4;
+}
+.orange-bg {
+  background-color: #fb4d3d;
+}
+.red-bg {
+  background-color: #ca1551;
+}
+
+#pagination {
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+#pagination ul {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+#pagination ul li {
+  width: 15px;
+  height: 15px;
+  background: white;
+  overflow: hidden;
+  border-radius: 15px;
+  margin: 20px 0px;
+  display: block;
+  opacity: 0.5;
+  transform: scale(0.5);
+  transition: all 0.4s cubic-bezier(0.55, -0.29, 0.46, 1.29);
+  cursor: pointer;
+}
+
+#pagination ul li:hover {
+  transform: scale(1);
+}
+
+#pagination ul li.active {
+  opacity: 1;
+  transform: scale(1);
+}
