@@ -21,35 +21,38 @@ jobs:
         uses: CultureHQ/actions-yarn@master
         with:
           args: demo:build
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
         with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish --dry-run
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          name: demo-build
+          path: public
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-          scope: '@fiveid'
-      - run: npm ci
-      - run: npm publish --dry-run
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+#   publish-npm:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: 12
+#           registry-url: https://registry.npmjs.org/
+#       - run: npm publish --dry-run
+#         env:
+#           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+#   publish-gpr:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: 12
+#           registry-url: https://npm.pkg.github.com/
+#           scope: '@fiveid'
+#       - run: npm publish --dry-run
+#         env:
+#           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           
   publish-demo:
     needs: build
@@ -57,6 +60,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Download Artifact
+        uses: actions/download-artifact@v1.0.0
+        with:
+          name: demo-build
+          path: public
       - name: Deploy Demo
         uses: crazy-max/ghaction-github-pages@v1
         with:
