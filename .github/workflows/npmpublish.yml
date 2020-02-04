@@ -40,7 +40,7 @@ jobs:
         uses: CultureHQ/actions-yarn@master
         with:
           args: build
-      - name: Publish  
+      - name: Publish
         uses: actions/setup-node@v1
         with:
           node-version: 12
@@ -49,29 +49,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install
-        uses: CultureHQ/actions-yarn@master
-        with:
-          args: install
-      - name: Build
-        uses: CultureHQ/actions-yarn@master
-        with:
-          args: build
-      - name: Publish Github  
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-          scope: '@fiveid'
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          
   publish-demo:
     needs: build
     runs-on: ubuntu-latest
@@ -89,5 +66,4 @@ jobs:
           target_branch: gh-pages
           build_dir: public
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_ACTIONS_TOKEN }}
-    
+          GITHUB_TOKEN: ${{ secrets.GITHUB_ACTIONS_TOKEN }}
