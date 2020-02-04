@@ -27,32 +27,50 @@ jobs:
           name: demo-build
           path: public
 
-#   publish-npm:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#           registry-url: https://registry.npmjs.org/
-#       - run: npm publish --dry-run
-#         env:
-#           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install
+        uses: CultureHQ/actions-yarn@master
+        with:
+          args: install
+      - name: Build
+        uses: CultureHQ/actions-yarn@master
+        with:
+          args: build
+      - name: Publish  
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: npm publish --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
-#   publish-gpr:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#           registry-url: https://npm.pkg.github.com/
-#           scope: '@fiveid'
-#       - run: npm publish --dry-run
-#         env:
-#           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install
+        uses: CultureHQ/actions-yarn@master
+        with:
+          args: install
+      - name: Build
+        uses: CultureHQ/actions-yarn@master
+        with:
+          args: build
+      - name: Publish Github  
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@fiveid'
+      - run: npm publish --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           
   publish-demo:
     needs: build
