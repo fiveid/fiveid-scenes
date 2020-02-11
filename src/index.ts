@@ -68,7 +68,7 @@ export class Scenes {
       { currentIndex: this.activeIndex, nextIndex: index },
       nextIndex => {
         const prev = this.activeIndex;
-        const next = this.validateTransitionValues(nextIndex || index);
+        const next = this.validateTransitionValues(nextIndex, index);
         this.scenes[prev].classList.remove(this.options.activeClass);
         this.scenes[next].classList.add(this.options.activeClass);
         this.activeIndex = next;
